@@ -90,28 +90,11 @@ public class MSButton
     ////your code here
     if (mouseButton == RIGHT) {
       marked = !marked;
-    }
-    if (marked = false) {
-      clicked = false;
-    } else {
-      if (bombs.contains(this)) {
-        displayLosingMessage();
-      } else {
-        if (countBombs(r, c)>0) {
-          label = "" + countBombs(r, c);
-        //} else {
-        //  for (int i = r-1; i <= r+ 1; i++) {
-        //    for (int b = c -1; b <= c + 1; b++) {
-        //      if (bombs.contains((buttons[r][c]))==false) {fix
-        //        mousePressed();
-        //      }
-        //    }
-        //  }
-        //}
-      }
-    }
   }
-}//extra brace
+  if(marked == false){
+    clicked = false;
+  }
+}
 
 
   public void draw () 

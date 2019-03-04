@@ -93,19 +93,25 @@ public class MSButton
       if (marked == false) {
         clicked = false;
       }
-    } else {
-      if (bombs.contains(this)) {
-        displayLosingMessage();
-      } else {
-        if (countBombs(r, c)>0) {
-          label = "" + countBombs(r, c);
-        } else {
-          
+    } 
+    else if (bombs.contains(this)) {
+       displayLosingMessage();
+    } 
+    else if (countBombs(r, c)>0) {
+       label = "" + countBombs(r, c);
+    } 
+    else {
+      for (int i = r-1; i <= r+ 1; i++) {
+       for (int b = c -1; b <= c + 1; b++) {
+        if (isValid(i, b)&&buttons[i][b].isClicked()==false) {
+          buttons[i][b].mousePressed();
         }
+       }
       }
     }
   }
-  //extra brace
+
+
 
 
   public void draw () 

@@ -23,7 +23,7 @@ void setup ()
 }
 public void setBombs()
 {
-  for (int hehexd = 0; hehexd <20; ) {
+  for (int hehexd = 0; hehexd <3; ) {
     int r = (int)(Math.random()*NUM_ROWS);
     int c = (int)(Math.random()*NUM_COLS);
     if (bombs.contains((buttons[r][c]))==false) {
@@ -42,16 +42,44 @@ public void draw ()
 }
 public boolean isWon()
 {
-  //your code here
+  int isW = 0;
+  for (int i = 0; i < NUM_ROWS; i++) {
+    for (int b = 0; b < NUM_COLS; b++) {
+      if (buttons[i][b].isClicked()==true) {
+        isW++;
+      }
+    }
+  }
+  if (isW==(NUM_ROWS*NUM_COLS)) {
+    return true;
+  }
   return false;
 }
 public void displayLosingMessage()
 {
-  //your code here
+  for(int i = 0; i < 20;i++){
+  buttons[0][i].setLabel("Y");
+  buttons[1][i].setLabel("O");
+  buttons[2][i].setLabel("U");
+  buttons[3][i].setLabel(" ");
+  buttons[4][i].setLabel("L");
+  buttons[5][i].setLabel("O");
+  buttons[6][i].setLabel("S");
+  buttons[7][i].setLabel("E");
+  }
 }
 public void displayWinningMessage()
 {
-  //your code here
+  
+  for(int i = 0; i < 20;i++){
+  buttons[0][i].setLabel("Y");
+  buttons[1][i].setLabel("O");
+  buttons[2][i].setLabel("U");
+  buttons[3][i].setLabel(" ");
+  buttons[4][i].setLabel("W");
+  buttons[5][i].setLabel("I");
+  buttons[6][i].setLabel("N");
+  }
 }
 
 public class MSButton
@@ -93,20 +121,17 @@ public class MSButton
       if (marked == false) {
         clicked = false;
       }
-    } 
-    else if (bombs.contains(this)) {
-       displayLosingMessage();
-    } 
-    else if (countBombs(r, c)>0) {
-       label = "" + countBombs(r, c);
-    } 
-    else {
+    } else if (bombs.contains(this)) {
+      displayLosingMessage();
+    } else if (countBombs(r, c)>0) {
+      label = "" + countBombs(r, c);
+    } else {
       for (int i = r-1; i <= r+ 1; i++) {
-       for (int b = c -1; b <= c + 1; b++) {
-        if (isValid(i, b)&&buttons[i][b].isClicked()==false) {
-          buttons[i][b].mousePressed();
+        for (int b = c -1; b <= c + 1; b++) {
+          if (isValid(i, b)&&buttons[i][b].isClicked()==false) {
+            buttons[i][b].mousePressed();
+          }
         }
-       }
       }
     }
   }
@@ -135,7 +160,7 @@ public class MSButton
   }
   public boolean isValid(int r, int c)
   {
-    if (r <= NUM_ROWS && c <= NUM_COLS && r >=0 && c >= 0) {
+    if (r < NUM_ROWS && c < NUM_COLS && r >=0 && c >= 0) {
       return true;
     }
     return false;
